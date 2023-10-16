@@ -68,7 +68,7 @@ The hidden text does appear the top of the txt file, followed by the bitmap info
 
 ![png output text screenshot](images/output_text_screenshot.jpg)
 
-Interestingly enough, however, the size of the png image actually decreased in size after execution of the `python3 cryptography-stenography.py >> output_text.txt` command by a slight amount. I would have expected it to be the other way around. Perhaps a bit of compression took place in the process?
+To view this project, please visit the [image-steganography-project](https://github.com/interglobalmedia/image-steganography-project) repository on Github.
 
 ## Applying image steganography with the steghide via Kali Linux
 
