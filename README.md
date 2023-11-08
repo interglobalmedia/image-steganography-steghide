@@ -72,9 +72,198 @@ To view this project, please visit the [image-steganography-project](https://git
 
 ## Applying image steganography with the steghide via Kali Linux
 
-In order to use the steghide package which is a command line tool, I have to install and use it via Kali Linux. I am on macOS and therefore not a Linux computer, so installing `steghide` directly onto my macOS is not possible.
+In order to use the `steghide package` which is a command line tool, I had to install and use it via `Kali Linux`. I am on macOS and therefore not a Linux computer, so installing `steghide` directly onto my `macOS` was not possible.
+
+First, I created two folders for my project so that I have everything well organized on my  `Kali Desktop`. One I call `file_embed`, and the other I call `file_extract`. So:
+
+```shell
+mkdir file_embed file_extract
+```
+
+Which resulted in:
+
+```shell
+file_embed
+file_extract
+test.txt
+```
+
+Next, I moved the `test.txt` file and the `jpg image` I had downloaded from `pexels.com` via `Firefox-ESR` in `Kali Linux` into the `file_embed` folder.
+
+I looked for the image download via Terminal so that I could get the path to it:
+
+```shell
+find -name "pexels-brian-machado-10626267.jpg"
+```
+
+Which returned:
+
+```shell
+./Downloads/pexels-brian-machado-10626267.jpg
+```
+
+I moved the image from the `Downloads folder` to the `Desktop folder`:
+
+```shell
+mv ./Downloads/pexels-brian-machado-10626267.jpg ~/Desktop
+```
+
+Next, I moved the image from the `Desktop` into the `file_embed` folder located on the `Desktop`. So:
+
+```shell
+mv pexels-brian-machado-10626267.jpg file_embed
+```
+
+And then I moved the `test.txt` file into the `file_embed` folder as well:
+
+```shell
+mv test.txt file_embed
+```
+
+Then I checked to make sure that I had successfully moved the two files into `file_embed`:
+
+```shell
+ls file_embed
+```
+
+Which returned the following:
+
+```shell
+pexels-brian-machado-10626267.jpg  test.txt
+```
+
+Now I was ready to conduct some `stenography` with `steghide` in `Kali Linux`!
+
+To `embed` the `test.txt` file into the `jpg image`, I used the following command:
+
+```shell
+steghide embed -ef file_embed/test.txt -cf file_embed/pexels-brian-machado-10626267.jpg
+```
+
+The `-ef` option stands for `embed file`, and the `-cf` option stands for `copy file`. So the command states that the `test.txt` file was the file to be `embedded` by `copying` it `into` the `jpg image`.
+
+And the following was initially returned:
+
+```shell
+Enter passphrase: 
+Re-Enter passphrase:
+```
+
+So I entered a passphrase of my choosing and hit return after inputting it the second time, and the following was returned in Terminal:
+
+```shell
+embedding "file_embed/test.txt" in "file_embed/pexels-brian-machadoembedding "file_embed/test.txt" in "file_embed/pexels-brian-machado-10626267.jpg"... done
+```
+
+The result of executing this command is the integration of the `test.txt` file into my `jpg image` I downloaded from `pexels.com`.
+
+Next, I had to `extract` `test.txt` from the j`pg image`, but I wanted to extract the file into the `file_extract` folder. First I `changed directories` (cd) into the empty `file_extract` folder from `Desktop`:
+
+```shell
+cd file_extract
+```
+
+Then, from there, I ran the following command to `extract` the `test.txt` file from the `jpg image`:
+
+```shell
+steghide extract -sf ../file_embed/pexels-brian-machado-10626267.jpg
+```
+
+The `-sf` option followed by the (path to the) `filename` extracts in this case the `test.txt` file from the jpg image.
+
+I had to add two dots before the slash in order to step out of the `file_extract` folder and into the `Desktop` in order to be able to access the `file_embed` folder there.
+
+Next, I ran the `ls file_extract` command from `Desktop` and the following was returned:
+
+```shell
+test.txt
+```
+
+Success! I kept my original `test.txt` file inside the `file_embed` folder, and then extracted it from inside the `file_extract` folder. And THEN, I could compare the two files to make sure that they actually are the same using the `sha-256 standard`.
+
+## Comparing the original (embedded) test.txt file in file_embed with the (extracted) test.txt file in file_extract using the SHA-256 standard
+
+Let's say I wanted to check and make sure that no changes had been made to my "confidential" `test.txt` file in the `embed/extract` process. Or let's say that I had embedded the `test.txt` file in my `jpg image` and that hypothetically I had sent it to someone else to extract the `test.txt` file from the `jpg image`, and they wanted to make sure that the file had not experienced any modifications or corruption along the way.
+
+I  already had the [SHA-256 standard](https://en.wikipedia.org/wiki/SHA-2) installed in my `Kali Linux OS` on my `macOS` via the `UTM` virtual machine, so I was able do the following to `check` the `integrity` of both my `test.txt` files located in the `file_embed` and `file_extract` folders.
+
+First, I created a `sha-256 hash digest` (`hash value`) for the `test.txt` file inside `file_embed` using the following command:
+
+```shell
+sha256sum file_embed/test.txt
+```
+
+And the following was returned:
+
+```shell
+6f6739d1e1439a493c82c506e4175739ac47a32418a122cf141fda7fe740ca17  file_embed/test.txt
+```
+
+I could also `redirect` the `hash digest` to a file, and then do the same for the `test.txt` file inside the `file_extract` folder. So first:
+
+```shell
+sha256sum file_embed/test.txt > checksum
+```
+
+Above, the single `>` greater than angle bracket which is a `redirect operator` in Command Line, `redirects` the `output` of a `command`. Here, it `redirects` the `output` of the `sha256sum` command to a file called `checksum`  which it also creates, because one did not previously exist.
+
+And when I run the `cat checksum` command:
+
+```shell
+cat checksum
+```
+
+The following is returned:
+
+```shell
+6f6739d1e1439a493c82c506e4175739ac47a32418a122cf141fda7fe740ca17  file_embed/test.txt
+```
+
+Next, I do the same for the `test.txt` file inside the `file_extract` folder. So first:
+
+```shell
+sha256sum file_extract/test.txt >> checksum
+```
+
+This time, I used the double `>>` greater than angle bracket to append the output of the `sha256sum` command to the contents of the checksum file. If I had used the single angle bracket, the existing contents of the file would have been overwritten by the `current output redirection`.
+
+Next, I ran the `cat` command on `checksum` again to view what has been added to the `checksum` file:
+
+```shell
+cat checksum
+```
+
+And the following was returned:
+
+```shell
+6f6739d1e1439a493c82c506e4175739ac47a32418a122cf141fda7fe740ca17  file_embed/test.txt
+6f6739d1e1439a493c82c506e4175739ac47a32418a122cf141fda7fe740ca17  file_extract/test.txt
+```
+
+The output of the second `sha256sum` command was `redirected` to the `checksum` file and appended to existing contents of the file.
+
+Next, I wanted to make sure that both files were the same, so I ran the following command on `checksum`:
+
+```shell
+sha256sum --check checksum
+```
+
+And the following was returned:
+
+```shell
+file_embed/test.txt: OK
+file_extract/test.txt: OK
+```
+
+Both files `passed` the `integrity test`.
+
+If I had subsequently made a change to one of the files, "FAILED" would have appeared instead of "OK".
+
+So this is how we can conduct `integrity checks` on `files` in (`Kali`) `Linux` that have undergone some sort of process or transmission, or simply have been in storage for a long time, to make sure that they had not been corrupted or modified.
 
 ## Related Resources
+
+- [Check for the integrity of your Kali Linux download macOS](https://github.com/interglobalmedia/checksum-kali-linux-download)
 
 - [What is steganography? Definition and explanation](https://www.kaspersky.com/resource-center/definitions/what-is-steganography)
 
@@ -87,3 +276,9 @@ In order to use the steghide package which is a command line tool, I have to ins
 - [What is Steganalysis?](https://www.linkedin.com/pulse/what-steganalysis-mayuri-bhamare/)
 
 - [sips macOS utility](https://ss64.com/osx/sips.html)
+
+- [How To Download A File In Linux](https://robots.net/how-to-guide/how-to-download-a-file-in-linux/)
+
+- [Generating an SHA-256 Hash From the Command Line](https://www.baeldung.com/linux/sha-256-from-command-line)
+
+- [10 Linux Command-Line Operators and What They Do](https://www.makeuseof.com/linux-command-line-chaining-operators/)
