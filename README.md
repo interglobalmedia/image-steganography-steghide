@@ -4,7 +4,7 @@
 
 Steganography is a method in which secret messages are hidden in cover media. Cover media refers to any unsuspicious file, such as a nature photo, family photo, audio, video clip, etc. And steganography means "covered writing".
 
->Content concealed through steganography is sometimes encrypted before being hidden within another file format. If it isn't encrypted, then it may be processed in some way to make it harder to detect. ⏤ <cite>[*What is steganography? Definition and explanation*](https://www.kaspersky.com/resource-center/definitions/what-is-steganography)</cite>
+>Content concealed through steganography is sometimes encrypted before being hidden within another file format. If it isn't encrypted, then it may be processed in some way to make it harder to detect. ⏤ <cite></cite>
 
 Steganography is sometimes compared to cryptography, because both are a form of covert communication. However, the two are NOT the same. Steganography does not involve scrambling data upon sending or using a key to decode it upon receipt. As a result, steganography is less popular than cryptography, because the structure of data is not altered by default. Forms of steganography are:
 
@@ -308,3 +308,5 @@ Bottom line? `Cryptography` over `Steganography`. And watch out for combinations
 - [10 Linux Command-Line Operators and What They Do](https://www.makeuseof.com/linux-command-line-chaining-operators/)
 
 - [Steganography explained and how to protect against it](https://www.csoonline.com/article/571265/steganography-explained-and-how-to-protect-against-it.html)
+
+- [*What is steganography? Definition and explanation*](https://www.kaspersky.com/resource-center/definitions/what-is-steganography)
