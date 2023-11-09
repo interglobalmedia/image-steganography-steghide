@@ -22,7 +22,7 @@ According to [Fortnet](https://www.fortinet.com/resources/cyberglossary/what-is-
 
 >Cryptography remains important to protecting data and users, ensuring confidentiality, and preventing cyber criminals from intercepting sensitive corporate information.
 
-## So what is Image Stenography in Cryptography?
+## So what is Image Steganography in Cryptography?
 
 According to [Geeks For Geeks](https://www.geeksforgeeks.org/image-steganography-in-cryptography/),
 
@@ -39,12 +39,12 @@ Detection of the message within the cover image is done by the process of stegan
 I actually built an image steganography project implementing the above described bitmap approach using PIL (Python Imaging Library). When I decrpyted the encrypted hidden text message inside an image, I got totally incomprehensible data output in Terminal. I also could not view the complete output, because it was too large for viewing in a Terminal window instance. I created a CLI command that would redirect the data into a text file that I could open and examine after running the command. The following is the command that I cerated to do this:
 
 ```shell
-python3 cryptography-stenography.py >> output_text.txt
+python3 cryptography-steganography.py >> output_text.txt
 ```
 
-This way, I could examine the complete output resulting from the executing of my `cryptography-stenography.py` file. Totally impossible to decipher. However, I found that using a jpg image is not good, because it is a lossy file format, which means that information is lost in processes.
+This way, I could examine the complete output resulting from the executing of my `cryptography-steganography.py` file. Totally impossible to decipher. However, I found that using a jpg image is not good, because it is a lossy file format, which means that information is lost in processes.
 
-Screenshot of executing `python 3 cryptography-stenography.py >> output_text.txt` before changing my jpg file to a png file:
+Screenshot of executing `python 3 cryptography-steganography.py >> output_text.txt` before changing my jpg file to a png file:
 
 ![jpg output text screenshot](images/output_text_jpg_screenshot.jpg)
 
@@ -61,7 +61,7 @@ For those of you that may not know what the sips command, it comes built in with
 When I changed it to png format, and then ran the following command again:
 
 ```shell
-python3 cryptography-stenography.py >> output_text.txt
+python3 cryptography-steganography.py >> output_text.txt
 ```
 
 The hidden text does appear the top of the txt file, followed by the bitmap information of the image.
@@ -132,7 +132,7 @@ Which returned the following:
 pexels-brian-machado-10626267.jpg  test.txt
 ```
 
-Now I was ready to conduct some `stenography` with `steghide` in `Kali Linux`!
+Now I was ready to conduct some `steganography` with `steghide` in `Kali Linux`!
 
 To `embed` the `test.txt` file into the `jpg image`, I used the following command:
 
@@ -261,7 +261,31 @@ If I had subsequently made a change to one of the files, "FAILED" would have app
 
 So this is how we can conduct `integrity checks` on `files` in (`Kali`) `Linux` that have undergone some sort of process or transmission, or simply have been in storage for a long time, to make sure that they had not been corrupted or modified.
 
+## Conclusion
+
+So why would one choose steganography over cryptography, or vice versa? Steganography conceals data within data, and
+
+>in a manner that it will make no meaning to anyone else except the intended recipient － *from* <cite>[Combination of Steganography and Cryptography: A short Survey](https://iopscience.iop.org/article/10.1088/1757-899X/518/5/052003/meta)</cite>
+
+Cryptography, on the other hand, changes data to ciphertext which can only be "deciphered" or understood with a decryption key. And it is popular because it scrambles the data. Steganography, on the other hand, by default, does not. And it does not require a key. A passphrase is commonly used, like with `steghide`.
+
+The main difference between Cryptography and Steganography is that Cryptography protects the contents of data or messages, and Steganography hides the contents. Even though both can be used for good, it is easier and commonly used by cyber threat actors.
+
+According to the article entitled [Steganography explained and how to protect against it](https://www.csoonline.com/article/571265/steganography-explained-and-how-to-protect-against-it.html) by Andrada Fiscutean on CSO Online,
+
+>Steganography has a critical advantage over cryptography: In cryptography, you know the secret message is there, only its content is concealed; in steganography, the existence of the secret message is often difficult to notice. Threat actors sometimes use the two techniques together, encrypting a message before sneaking it inside a file.
+
+Cryptography can ensure the confidentiality, and integrity of data, but Steganography violates the integrity of the host file in which the data is hiddeen. It also violates [Kerchkoff's (2nd) principle of Cryptography](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle#Explanation_of_the_principle), which states,
+
+>It should not require secrecy, and it should not be a problem if it falls into enemy hands;
+
+Some of his original principles are no longer relevant, but this second one is still extremely important.
+
+Bottom line? `Cyptography` over `Steganography`.
+
 ## Related Resources
+
+- [Combination of Steganography and Cryptography: A short Survey](https://iopscience.iop.org/article/10.1088/1757-899X/518/5/052003/meta)
 
 - [Check for the integrity of your Kali Linux download macOS](https://github.com/interglobalmedia/checksum-kali-linux-download)
 
@@ -282,3 +306,5 @@ So this is how we can conduct `integrity checks` on `files` in (`Kali`) `Linux` 
 - [Generating an SHA-256 Hash From the Command Line](https://www.baeldung.com/linux/sha-256-from-command-line)
 
 - [10 Linux Command-Line Operators and What They Do](https://www.makeuseof.com/linux-command-line-chaining-operators/)
+
+- [Steganography explained and how to protect against it](https://www.csoonline.com/article/571265/steganography-explained-and-how-to-protect-against-it.html)
