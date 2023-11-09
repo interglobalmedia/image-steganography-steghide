@@ -1,4 +1,4 @@
-# Steganography using Python vs Steghide via CLI
+# Steganography using Python vs Steghide via CLI (and how does it compare to Cryptography?)
 
 ## What is Steganography and how does it compare to Cryptography?
 
