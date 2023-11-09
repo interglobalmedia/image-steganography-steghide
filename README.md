@@ -281,7 +281,7 @@ Cryptography can ensure the confidentiality, and integrity of data, but Steganog
 
 Some of his original principles are no longer relevant, but this second one is still extremely important.
 
-Bottom line? `Cyptography` over `Steganography`.
+Bottom line? `Cryptography` over `Steganography`. And watch out for combinations of `Cryptography` AND `Steganography`.
 
 ## Related Resources
 
