@@ -28,7 +28,7 @@ According to [Geeks For Geeks](https://www.geeksforgeeks.org/image-steganography
 
 >As the name suggests, Image Steganography refers to the process of hiding data within an image file. The image selected for this purpose is called the cover image and the image obtained after steganography is called the stego image.
 
-Steganography in of itself is "security by obscurity". This means that the secret message embedded in the image could end up being "uncovered". But combining and cryptography Steganography is a robust way to disguise a message from adversaries while still protecting it in case of detection.
+Steganography in of itself is "security by obscurity". This means that the secret message embedded in the image could end up being "uncovered". But combining Cryptography and Steganography is a robust way to disguise a message from adversaries while still protecting it in case of detection.
 
 One way of implementing a cryptographic algorithm approach is concealing a [large amount of data](https://www.geeksforgeeks.org/image-steganography-in-cryptography/) within a color bitmap (bmp) image. The image is filtered and segmented, with bits replacement applied to the appropriate pixels. These pixels are chosen at random.
 
@@ -36,7 +36,7 @@ Detection of the message within the cover image is done by the process of stegan
 
 >Steganalysis is the study of detecting messages hidden using steganography; this is analogous to cryptanalysis applied to cryptography. Steganalysis refers to detection of the presence of hidden information in the stego-object.
 
-I actually built an image steganography project implementing the above described bitmap approach using the the PIL (Python Imaging Library). When I decrpyted the encrypted hidden text message inside an image, I got totally incomprehensible data output in Terminal. I also could not view the complete output, because it was too large for viewing in aTerminal window instance. O I created a CLI command that would redirect the data into a text file that I could open and examine after running the command. The following is the command that I cerated to do this:
+I actually built an image steganography project implementing the above described bitmap approach using PIL (Python Imaging Library). When I decrpyted the encrypted hidden text message inside an image, I got totally incomprehensible data output in Terminal. I also could not view the complete output, because it was too large for viewing in a Terminal window instance. I created a CLI command that would redirect the data into a text file that I could open and examine after running the command. The following is the command that I cerated to do this:
 
 ```shell
 python3 cryptography-stenography.py >> output_text.txt
@@ -74,7 +74,7 @@ To view this project, please visit the [image-steganography-project](https://git
 
 In order to use the `steghide package` which is a command line tool, I had to install and use it via `Kali Linux`. I am on macOS and therefore not a Linux computer, so installing `steghide` directly onto my `macOS` was not possible.
 
-First, I created two folders for my project so that I have everything well organized on my  `Kali Desktop`. One I call `file_embed`, and the other I call `file_extract`. So:
+First, I created two folders for my project so that I could have everything well organized on my  `Kali Desktop`. One I called `file_embed`, and the other I called `file_extract`. So:
 
 ```shell
 mkdir file_embed file_extract
@@ -155,9 +155,9 @@ So I entered a passphrase of my choosing and hit return after inputting it the s
 embedding "file_embed/test.txt" in "file_embed/pexels-brian-machadoembedding "file_embed/test.txt" in "file_embed/pexels-brian-machado-10626267.jpg"... done
 ```
 
-The result of executing this command is the integration of the `test.txt` file into my `jpg image` I downloaded from `pexels.com`.
+The result of executing this command wass the integration of the `test.txt` file into my `jpg image` I downloaded from `pexels.com`.
 
-Next, I had to `extract` `test.txt` from the j`pg image`, but I wanted to extract the file into the `file_extract` folder. First I `changed directories` (cd) into the empty `file_extract` folder from `Desktop`:
+Next, I had to `extract` `test.txt` from the j`pg image`, but I wanted to extract the file into the `file_extract` folder. I `changed directories` (cd) into the empty `file_extract` folder from `Desktop`:
 
 ```shell
 cd file_extract
@@ -181,9 +181,9 @@ test.txt
 
 Success! I kept my original `test.txt` file inside the `file_embed` folder, and then extracted it from inside the `file_extract` folder. And THEN, I could compare the two files to make sure that they actually are the same using the `sha-256 standard`.
 
-## Comparing the original (embedded) test.txt file in file_embed with the (extracted) test.txt file in file_extract using the SHA-256 standard
+## Checking for file integrity
 
-Let's say I wanted to check and make sure that no changes had been made to my "confidential" `test.txt` file in the `embed/extract` process. Or let's say that I had embedded the `test.txt` file in my `jpg image` and that hypothetically I had sent it to someone else to extract the `test.txt` file from the `jpg image`, and they wanted to make sure that the file had not experienced any modifications or corruption along the way.
+Let's say I wanted to check and make sure that no changes had been made to my "confidential" `test.txt` file in the `embed/extract` process. Or let's say that I had embedded the `test.txt` file in my `jpg image` and that hypothetically I had sent it to someone else to extract the `test.txt` file`, and they wanted to make sure that the file had not experienced any modifications or corruption in transit.
 
 I  already had the [SHA-256 standard](https://en.wikipedia.org/wiki/SHA-2) installed in my `Kali Linux OS` on my `macOS` via the `UTM` virtual machine, so I was able do the following to `check` the `integrity` of both my `test.txt` files located in the `file_embed` and `file_extract` folders.
 
@@ -213,13 +213,13 @@ And when I run the `cat checksum` command:
 cat checksum
 ```
 
-The following is returned:
+The following was returned:
 
 ```shell
 6f6739d1e1439a493c82c506e4175739ac47a32418a122cf141fda7fe740ca17  file_embed/test.txt
 ```
 
-Next, I do the same for the `test.txt` file inside the `file_extract` folder. So first:
+Next, I did the same for the `test.txt` file inside the `file_extract` folder. So first:
 
 ```shell
 sha256sum file_extract/test.txt >> checksum
