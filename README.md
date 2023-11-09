@@ -301,8 +301,6 @@ Bottom line? `Cryptography` over `Steganography`. And watch out for combinations
 
 - [sips macOS utility](https://ss64.com/osx/sips.html)
 
-- [How To Download A File In Linux](https://robots.net/how-to-guide/how-to-download-a-file-in-linux/)
-
 - [Generating an SHA-256 Hash From the Command Line](https://www.baeldung.com/linux/sha-256-from-command-line)
 
 - [10 Linux Command-Line Operators and What They Do](https://www.makeuseof.com/linux-command-line-chaining-operators/)
