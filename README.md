@@ -283,6 +283,8 @@ Some of his original principles are no longer relevant, but this second one is s
 
 Bottom line? `Cryptography` over `Steganography`. And watch out for combinations of `Cryptography` AND `Steganography`.
 
+I will be following up this post with another which will focus on how one CAN detect **stego-images**. I recently was apprised of a tool that does just that. Stay tuned!
+
 ## Related Resources
 
 - [Combination of Steganography and Cryptography: A short Survey](https://iopscience.iop.org/article/10.1088/1757-899X/518/5/052003/meta)
